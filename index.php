@@ -9,9 +9,9 @@ require_once './partials/functions.php';
 
 
 $data = [
-  "letters" => ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y', 'z'],
-  "numbers" => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-  "special_characters" => ['!', '?', '&', '%', '$', '<', '>', '^', '+', '-', '*', '/', '(', ')', '[', ']', '{', '}', '@', '#', '_', '=']
+  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y', 'z'],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+  ['!', '?', '&', '%', '$', '<', '>', '^', '+', '-', '*', '/', '(', ')', '[', ']', '{', '}', '@', '#', '_', '=']
 ];
 // $letters = ;
 // $numbers = ;
@@ -38,7 +38,7 @@ $data = [
   }
 
   .container:last-child {
-    margin-top: 75vh;
+    margin-top: 50vh;
   }
 </style>
 
@@ -57,7 +57,7 @@ $data = [
 
 
     <?php if (!empty($_GET['psw_length'])) : ?>
-      <h2 class="mt-5">La tua password generata è <?php generate_psw($_GET['psw_length']) ?></h2>
+      <h2 class="mt-5">La tua password generata è <span class="text-primary"><?php generate_psw($data, $_GET['psw_length']) ?></span></h2>
     <?php endif; ?>
 
 
