@@ -1,11 +1,14 @@
 <?php
 
 
+// Faccio partire una sessione se non è già attiva
+if (!isset($_SESSION)) {
+  session_start();
+}
+
 //Includo le funzioni
 
 require_once './partials/functions.php';
-
-// Base Dati
 
 
 $data = [
@@ -14,7 +17,15 @@ $data = [
   ['!', '?', '&', '%', '$', '<', '>', '^', '+', '-', '*', '/', '(', ')', '[', ']', '{', '}', '@', '#', '_', '=']
 ];
 
-session_start();
+if (isset($_GET['psw_length'])) {
+  $_SESSION['psw'] = generate_psw($data, $_GET['psw_length']);
+}
+
+// Base Dati
+
+
+
+
 
 
 ?>
@@ -35,10 +46,9 @@ session_start();
 <style>
   body {
     height: 100vh;
-  }
-
-  .container:last-child {
-    margin-top: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
 
@@ -51,41 +61,22 @@ session_start();
 
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
       <label for="input_psw">Quanto vuoi che sia lunga la tua password?</label>
-      <input type="number" class="form-control" name="psw_length" id="input_psw" placeholder="Scrivi un numero tra 8 e 32">
+      <input type="number" class="form-control" name="psw_length" id="input_psw" placeholder="Scrivi un numero tra 8 e 32" value="<?php echo $_GET['psw_length'] ?? ''; ?>">
       <button class="btn btn-primary mt-3" type="submit">Genera</button>
     </form>
 
 
-    <?php if (!empty($_GET['psw_length'])) : ?>
+    <?php if (isset($_SESSION['psw'])) : ?>
       <h2 class="mt-5">La tua password generata è <span class="text-primary">
-          <?php $_SESSION['psw'] = generate_psw($data, $_GET['psw_length']) ?>
+          <?php echo $_SESSION['psw']; ?>
         </span>
       </h2>
     <?php endif; ?>
 
-    <h3>La password salvata nella session è <?php echo $_SESSION['psw'] ?></h3>
-    <?php var_dump($_SESSION) ?>
 
 
   </div>
-  <div class="container">
-    <p class="">
-      Descrizione
-      Dobbiamo creare una pagina che permetta ai nostri utenti di utilizzare il nostro generatore di password (abbastanza) sicure.
-      L’esercizio è suddiviso in varie milestone ed è molto importante svilupparle in modo ordinato.
-      Milestone 1
-      Creare un form che invii in GET la lunghezza della password. Una nostra funzione utilizzerà questo dato per generare una password casuale (composta da lettere, lettere maiuscole, numeri e simboli (!?&%$<>^+-*/()[]{}@#_=)) da restituire all’utente.
-        Scriviamo tutto (logica e layout) in un unico file index.php
-        Milestone 2
-        Verificato il corretto funzionamento del nostro codice, spostiamo la logica in un file functions.php che includeremo poi nella pagina principale
-        Milestone 3
-        Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $_SESSION recupererà la password da mostrare all’utente.
-        Milestone 4 (BONUS)
-        Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
-        Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali.
 
-    </p>
-  </div>
 
 
 </body>
