@@ -13,9 +13,9 @@ $data = [
   [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
   ['!', '?', '&', '%', '$', '<', '>', '^', '+', '-', '*', '/', '(', ')', '[', ']', '{', '}', '@', '#', '_', '=']
 ];
-// $letters = ;
-// $numbers = ;
-// $special_characters = ;
+
+session_start();
+
 
 ?>
 
@@ -57,10 +57,14 @@ $data = [
 
 
     <?php if (!empty($_GET['psw_length'])) : ?>
-      <h2 class="mt-5">La tua password generata è <span class="text-primary"><?php generate_psw($data, $_GET['psw_length']) ?></span></h2>
+      <h2 class="mt-5">La tua password generata è <span class="text-primary">
+          <?php $_SESSION['psw'] = generate_psw($data, $_GET['psw_length']) ?>
+        </span>
+      </h2>
     <?php endif; ?>
 
-
+    <h3>La password salvata nella session è <?php echo $_SESSION['psw'] ?></h3>
+    <?php var_dump($_SESSION) ?>
 
 
   </div>
