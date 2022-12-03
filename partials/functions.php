@@ -32,3 +32,9 @@ function generate_psw($data, $length, $filter = [0, 1, 2])
   }
   return $psw;
 }
+
+
+
+
+// BUG
+// Nel var dump di debug che ho fatto della password, esce sempre della lunghezza corrispondente al valore dell'input dell'utente, tuttavia non sempre l'eco della password in pagina è lungo tanto quanto quello generato dalla funzione. Non saprei perché
