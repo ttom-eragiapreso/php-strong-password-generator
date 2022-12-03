@@ -2,9 +2,11 @@
 
 
 // Faccio partire una sessione se non è già attiva
+session_unset();
 if (!isset($_SESSION)) {
   session_start();
-} else session_unset();
+}
+
 
 //Includo le funzioni
 
@@ -66,19 +68,19 @@ if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
 
       <!-- CHECKBOXES -->
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="filter[]" value="0" id="flexCheckDefault1">
+        <input class="form-check-input" type="checkbox" name="filter[]" value="0" id="flexCheckDefault1" checked>
         <label class="form-check-label" for="flexCheckDefault1">
           Includi Lettere
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="filter[]" value="1" id="flexCheckDefault2">
+        <input class="form-check-input" type="checkbox" name="filter[]" value="1" id="flexCheckDefault2" checked>
         <label class="form-check-label" for="flexCheckDefault2">
           Includi Numeri
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="filter[]" value="2" id="flexCheckDefault3">
+        <input class="form-check-input" type="checkbox" name="filter[]" value="2" id="flexCheckDefault3" checked>
         <label class="form-check-label" for="flexCheckDefault3">
           Includi Caratteri Speciali
         </label>
