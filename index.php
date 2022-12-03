@@ -4,12 +4,13 @@
 // Faccio partire una sessione se non è già attiva
 if (!isset($_SESSION)) {
   session_start();
-}
+} else session_unset();
 
 //Includo le funzioni
 
 require_once './partials/functions.php';
 
+// Base Dati
 
 $data = [
   ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y', 'z'],
@@ -17,11 +18,10 @@ $data = [
   ['!', '?', '&', '%', '$', '<', '>', '^', '+', '-', '*', '/', '(', ')', '[', ']', '{', '}', '@', '#', '_', '=']
 ];
 
-if (isset($_GET['psw_length'])) {
-  $_SESSION['psw'] = generate_psw($data, $_GET['psw_length']);
+if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
+  $_SESSION['psw'] = generate_psw($data, $_GET['psw_length'], $_GET['filter']);
 }
 
-// Base Dati
 
 
 
@@ -62,6 +62,27 @@ if (isset($_GET['psw_length'])) {
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
       <label for="input_psw">Quanto vuoi che sia lunga la tua password?</label>
       <input type="number" class="form-control" name="psw_length" id="input_psw" placeholder="Scrivi un numero tra 8 e 32" value="<?php echo $_GET['psw_length'] ?? ''; ?>">
+
+
+      <!-- CHECKBOXES -->
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="filter[]" value="0" id="flexCheckDefault1">
+        <label class="form-check-label" for="flexCheckDefault1">
+          Includi Lettere
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="filter[]" value="1" id="flexCheckDefault2">
+        <label class="form-check-label" for="flexCheckDefault2">
+          Includi Numeri
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="filter[]" value="2" id="flexCheckDefault3">
+        <label class="form-check-label" for="flexCheckDefault3">
+          Includi Caratteri Speciali
+        </label>
+      </div>
       <button class="btn btn-primary mt-3" type="submit">Genera</button>
     </form>
 
@@ -73,6 +94,9 @@ if (isset($_GET['psw_length'])) {
       </h2>
     <?php endif; ?>
 
+
+    <?php var_dump($_GET) ?>
+    <?php var_dump($_SESSION) ?>
 
 
   </div>
