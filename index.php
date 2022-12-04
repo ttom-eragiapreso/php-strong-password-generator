@@ -23,6 +23,7 @@ $data = [
 $char_once = $_GET['char_once'] ?? '';
 
 if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
+
   $_SESSION['psw'] = generate_psw($data, $_GET['psw_length'], $char_once, $_GET['filter']);
 }
 
@@ -96,10 +97,8 @@ if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
 
 
     <?php if (isset($_SESSION['psw'])) : ?>
-      <h2 class="mt-5">La tua password generata è <span class="text-primary">
-          <?php echo $_SESSION['psw']; ?>
-        </span>
-      </h2>
+      <h2 class="mt-5">La tua password generata è</h2>
+      <p class="text-primary fs-2"> <?php echo $_SESSION['psw'] ?></p>
     <?php endif; ?>
 
 

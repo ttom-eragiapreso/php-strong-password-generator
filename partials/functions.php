@@ -31,7 +31,6 @@ function generate_psw($data, $length, $once, $filter = [0, 1, 2])
             $i++;
           } else {
             echo "ho estratto $list[$random_item] e $psw già lo contiene";
-            //$psw .= $list[$random_item];
           }
         } else {
           if (is_string($list[$random_item]) && $random_uppercase) {
