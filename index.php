@@ -20,8 +20,10 @@ $data = [
   ['!', '?', '&', '%', '$', '<', '>', '^', '+', '-', '*', '/', '(', ')', '[', ']', '{', '}', '@', '#', '_', '=']
 ];
 
+$char_once = $_GET['char_once'] ?? '';
+
 if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
-  $_SESSION['psw'] = generate_psw($data, $_GET['psw_length'], $_GET['filter']);
+  $_SESSION['psw'] = generate_psw($data, $_GET['psw_length'], $char_once, $_GET['filter']);
 }
 
 
@@ -85,6 +87,10 @@ if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
           Includi Caratteri Speciali
         </label>
       </div>
+      <div class="form-check">
+        <input type="checkbox" name="char_once" id="once" class="form-check-input" value="1">
+        <label for="once">Escludi ripetizioni</label>
+      </div>
       <button class="btn btn-primary mt-3" type="submit">Genera</button>
     </form>
 
@@ -99,6 +105,7 @@ if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
 
     <?php var_dump($_GET) ?>
     <?php var_dump($_SESSION) ?>
+    <?php var_dump($char_once)  ?>
 
 
   </div>
