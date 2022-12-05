@@ -24,13 +24,13 @@ function generate_psw($data, $length, $once, $filter = [0, 1, 2])
         $random_item = rand(0, count($list) - 1);
 
         if ($once && count($list) > $length) {
-          echo "all'iterazione $i, once è  $once <br>";
+          //echo "all'iterazione $i, once è  $once <br>";
 
           if (!str_contains($psw, $list[$random_item])) {
             is_string($list[$random_item]) && $random_uppercase ? $psw .= strtoupper($list[$random_item]) : $psw .= $list[$random_item];
             $i++;
           } else {
-            echo "ho estratto $list[$random_item] e $psw già lo contiene";
+            //echo "ho estratto $list[$random_item] e $psw già lo contiene";
           }
         } else {
           if (is_string($list[$random_item]) && $random_uppercase) {

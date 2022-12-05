@@ -98,13 +98,16 @@ if (isset($_GET['psw_length']) && isset($_GET['filter'])) {
 
     <?php if (isset($_SESSION['psw'])) : ?>
       <h2 class="mt-5">La tua password generata è</h2>
-      <p class="text-primary fs-2"> <?php echo $_SESSION['psw'] ?></p>
+      <p class="text-primary fs-2"> <?php echo htmlspecialchars($_SESSION['psw'])  ?></p>
     <?php endif; ?>
 
 
-    <?php var_dump($_GET) ?>
-    <?php var_dump($_SESSION) ?>
-    <?php var_dump($char_once)  ?>
+    <?php //var_dump($_GET) 
+    ?>
+    <?php //var_dump($_SESSION) 
+    ?>
+    <?php //var_dump($char_once)  
+    ?>
 
 
   </div>
